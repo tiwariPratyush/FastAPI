@@ -8,10 +8,12 @@ class Patient(BaseModel):
     name : Annotated[str,Field(max_length=50,title="Name of the Patient",description="This field is used to store the name of the patient",examples = ["Pratyush","Saurabh"])] # using annotated to add more metadata
     email : EmailStr
     age : int = Field(gt=0,lt=60) # age should be greater than 0 and less than 60
-    weight : float = Field(gt=0) # weight should be greater than 0
+    # weight : float = Field(gt=0) # weight should be greater than 0
+    weight : Annotated[float,Field(gt=0,strict=True)] # strict is used to ensure that the value is of the correct type
     # married : bool
     married : Annotated[bool,Field(default=None,title="Marital Status",description="This field indicates whether the patient is married or not",examples=[True,False])] # using annotated to add more metadata
-    allergies : Optional[List[str]] = None  # only list is not sufficient we need to specify the type of elements in the list
+    # allergies : Optional[List[str]] = None  # only list is not sufficient we need to specify the type of elements in the list
+    allergies : Annotated[Optional[List[str]],Field(default=None,max_length=5)]
     contact_details : Dict[str,str] # only dict is not sufficient we need to specify the type of keys and values in the dict
     
     
