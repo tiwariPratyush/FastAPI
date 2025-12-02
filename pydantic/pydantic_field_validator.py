@@ -24,6 +24,12 @@ class Patient(BaseModel):
             raise ValueError("Not a valid domain")
         
         return value
+    
+    @field_validator('name') # field_validator is a decorator used to validate a specific field and it is a classmethod
+    @classmethod
+    def transform_name(cls,value):
+       return value.upper()
+        
         
         
 def update_patient_data(patient:Patient):
@@ -34,7 +40,7 @@ def update_patient_data(patient:Patient):
     print(patient.married)
     print(patient.allergies)
     print(patient.contact_details)
-    print("updated" )
+    print("updated")
     
     
 patient_info = {
